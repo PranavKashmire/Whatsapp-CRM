@@ -284,14 +284,7 @@ async function runPollCycle() {
 
 ## Submission Requirements Checklist
 
-This repository perfectly maps to the **Bloc - Founding AI & Automation Developer** assignment:
-
-1. **Live deployed link**: *(Add your link here if you deploy to Render/Vercel)*
-2. **GitHub repository with README**: You are reading it!
-    *   *Setup instructions:* See [Quick Setup](#quick-setup) above.
-    *   *Screenshot/Explanation of automation workflow:* Since the prompt explicitly stated *"We care about system design, logic, and clarity - not the stack"*, the automation workflow was designed **programmatically in pure Node.js** (`services/sheetsPoller.js`), avoiding brittle no-code tools like Zapier/n8n. See the *Google Sheets Poller* section above for the architectural logic.
-    *   *Explanation of development logic and Database Structure:* See the *Database Schema*, *In-Memory Tracking Maps*, and *Assignment Logic* sections.
-    *   *How automation is triggered:* The automation is an internal interval loop that starts on server boot and fetches data every 30 seconds via the official `googleapis` SDK.
-    *   *What you would improve with more time:* See [What I Would Improve...](#what-i-would-improve-with-more-time) block above.
-3. **Google Sheets link with Test Leads**: *(Add your Google Sheets link here)*
-4. **Short video demo of the Web app**: See the `preview.webp` file at the root of the repository or the top of this document.
+1. Github Repo link - https://github.com/PranavKashmire/Whatsapp-CRM
+2. **Screenshot/Explanation of automation workflow**: Rather than a screenshot of a Zapier flowchart, the automation workflow is a programmatic Native Node.js service (`services/sheetsPoller.js`). See the **Google Sheets Poller** section above for the full architectural logic and Mermaid workflow diagram.
+3. **Google Sheets link with Test Leads**:(https://docs.google.com/spreadsheets/d/1cjDoKuVqfkrAQNSXEvWdi9jRnr2OatrI_48HlWVnv_c/edit?gid=0#gid=0)
+4. **Short video demo of the Web app**:  https://drive.google.com/file/d/1YaZnv-DVdfc3ZLfhWtO27AwMISQ-9HVl/view
