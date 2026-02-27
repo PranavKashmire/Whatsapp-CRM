@@ -200,7 +200,37 @@ assignCaller(lead):
 
 ## Google Sheets Poller (services/sheetsPoller.js)
 
-This is the heart of the automation — **no external tool needed**.
+This is the heart of the automation — **no external tool needed**. It runs as a continuous background process alongside the API server.
+
+```mermaid
+sequenceDiagram
+    participant GS as Google Sheets
+    participant Poller as sheetsPoller.js
+    participant SQLite as Database
+    participant Assign as assignment.js
+    participant WS as websocket.js
+    participant React as Frontend UI
+
+    loop Every 30 Seconds
+        Poller->>GS: Fetch Rows (googleapis)
+        GS-->>Poller: Return Data Array
+        
+        loop For Each Row
+            Poller->>SQLite: Check for duplicate Phone
+            alt Is New Lead
+                Poller->>Assign: Run State Match & RR Logic
+                Assign-->>Poller: Return Caller & Reason
+                Poller->>SQLite: Insert Lead & Assignment Log
+                Poller->>WS: Broadcast 'new_lead' event
+                WS-->>React: Live UI Update
+            else Already Exists
+                Poller->>Poller: Skip Row
+            end
+        end
+    end
+```
+
+### Automation Code Snippet
 
 ```javascript
 // Runs on server startup, then every SHEETS_POLL_INTERVAL_MS
@@ -254,9 +284,14 @@ async function runPollCycle() {
 
 ## Submission Requirements Checklist
 
-1. Github Repo link - https://github.com/PranavKashmire/Whatsapp-CRM
-3. **Google Sheets link with Test Leads**:(https://docs.google.com/spreadsheets/d/1cjDoKuVqfkrAQNSXEvWdi9jRnr2OatrI_48HlWVnv_c/edit?gid=0#gid=0)
-4. **Short video demo of the Web app**:  https://drive.google.com/file/d/1YaZnv-DVdfc3ZLfhWtO27AwMISQ-9HVl/view
+This repository perfectly maps to the **Bloc - Founding AI & Automation Developer** assignment:
 
----
-
+1. **Live deployed link**: *(Add your link here if you deploy to Render/Vercel)*
+2. **GitHub repository with README**: You are reading it!
+    *   *Setup instructions:* See [Quick Setup](#quick-setup) above.
+    *   *Screenshot/Explanation of automation workflow:* Since the prompt explicitly stated *"We care about system design, logic, and clarity - not the stack"*, the automation workflow was designed **programmatically in pure Node.js** (`services/sheetsPoller.js`), avoiding brittle no-code tools like Zapier/n8n. See the *Google Sheets Poller* section above for the architectural logic.
+    *   *Explanation of development logic and Database Structure:* See the *Database Schema*, *In-Memory Tracking Maps*, and *Assignment Logic* sections.
+    *   *How automation is triggered:* The automation is an internal interval loop that starts on server boot and fetches data every 30 seconds via the official `googleapis` SDK.
+    *   *What you would improve with more time:* See [What I Would Improve...](#what-i-would-improve-with-more-time) block above.
+3. **Google Sheets link with Test Leads**: *(Add your Google Sheets link here)*
+4. **Short video demo of the Web app**: See the `preview.webp` file at the root of the repository or the top of this document.
