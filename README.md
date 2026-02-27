@@ -249,9 +249,14 @@ async function runPollCycle() {
 3. **Caller absence** — mark a caller as absent for the day without fully deactivating them
 4. **Lead queue** — when all callers are capped, queue the lead and auto-assign at midnight reset
 5. **WhatsApp message** — send a WhatsApp template message to the lead when assigned (using official API)
-6. **Auth** — JWT login, admin vs viewer roles
-7. **Unit tests** — for the assignment engine edge cases (all capped, state with 1 caller, concurrent inserts)
-8. **Retry logic** — if Google Sheets API returns 429 or 5xx, back off and retry with exponential delay
+
+
+
+## Submission Requirements Checklist
+
+1. Github Repo link - https://github.com/PranavKashmire/Whatsapp-CRM
+3. **Google Sheets link with Test Leads**:(https://docs.google.com/spreadsheets/d/1cjDoKuVqfkrAQNSXEvWdi9jRnr2OatrI_48HlWVnv_c/edit?gid=0#gid=0)
+4. **Short video demo of the Web app**:  https://drive.google.com/file/d/1YaZnv-DVdfc3ZLfhWtO27AwMISQ-9HVl/view
 
 ---
 
